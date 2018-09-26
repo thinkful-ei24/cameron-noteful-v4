@@ -3,8 +3,12 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  name: { type: String, required: true, unique: true }
+  name: { type: String, required: true},
+  userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}
 });
+
+// Make sure name and userId combo is unique
+schema.index({name: 1, userId: 1}, {unique: true});
 
 // Add `createdAt` and `updatedAt` fields
 schema.set('timestamps', true);
