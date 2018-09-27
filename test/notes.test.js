@@ -20,7 +20,7 @@ chai.use(chaiHttp);
 const expect = chai.expect;
 const sandbox = sinon.createSandbox();
 
-describe.only('Noteful API - Notes', function () {
+describe('Noteful API - Notes', function () {
 
   let user;
   let token;
