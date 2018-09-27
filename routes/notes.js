@@ -13,7 +13,7 @@ const router = express.Router();
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
 const folderPromise = function(folderId, userId){
-  if(folderId===undefined){
+  if(folderId===undefined || folderId===''){
     return Promise.resolve();
   }
   if(!mongoose.Types.ObjectId.isValid(folderId)){
