@@ -23,7 +23,7 @@ router.post('/', (req, res, next) => {
   );
 
   if(notStringField) {
-    const err = new Error(`Incorrect field type for ${notStringField}; expected string`);
+    const err = new Error(`Incorrect field type for ${notStringField}: expected string`);
     err.status = 422;
     return next(err);
   }
@@ -69,12 +69,19 @@ router.post('/', (req, res, next) => {
     return next(err);
   }
 
+  let trimmedFullname;  
+  if(fullname){
+    trimmedFullname = fullname.trim();
+  } else {
+    trimmedFullname = '';
+  }
+
   return User.hashPassword(password)
     .then(digest => {
       const newUser = {
         username,
         password: digest,
-        fullname
+        fullname: trimmedFullname
       };
       return User.create(newUser);
     })
